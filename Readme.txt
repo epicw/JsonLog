@@ -6,7 +6,7 @@
 
 2. Gradle build and run the project
 
-   In command line, go to {project} folder, use "gradle build"
+   In command line, go to {project} folder, use "gradle createJar". Because I create one task called createJar in build.gradle
 
    Copy test.json from {project} folder to {project}/build/lib
 
