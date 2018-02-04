@@ -10,7 +10,7 @@
 
    Copy test.json from {project} folder to {project}/build/lib
 
-   Then open {project}/build/libs, run "java -jar JsonLog-all test.json"
+   Then open {project}/build/libs, run "java -jar JsonLog-all.jar test.json"
 
 3. Gradle test
 
