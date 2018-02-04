@@ -9,29 +9,21 @@ import com.readJson.Event;
 
 public class EventAlert {
 
-	public List<Output> longestEvent(List<Event> list) {	
+	public List<Output> longestEvent(List<Event> list) {
 
-		if(list == null || list.size() == 0) {
+		if (list == null || list.size() == 0) {
 
 			return new ArrayList<Output>();
 
 		}
 
-		
-
 		List<Output> res = new ArrayList<>();
-
-		
 
 		HashMap<String, List<Event>> record = new HashMap<>();
 
-		
+		for (Event event : list) {
 
-		for(Event event : list) {
-
-			
-
-			if(!record.containsKey(event.getId())) {
+			if (!record.containsKey(event.getId())) {
 
 				record.put(event.getId(), new ArrayList<Event>());
 
@@ -41,29 +33,23 @@ public class EventAlert {
 
 		}
 
-		
-
-		for(Entry<String, List<Event>> entry : record.entrySet()) {
+		for (Entry<String, List<Event>> entry : record.entrySet()) {
 
 			List<Event> tempList = entry.getValue();
 
-			if((Math.abs(tempList.get(0).getTimestamp() - tempList.get(1).getTimestamp()) > 4)) {
+			if ((Math.abs(tempList.get(0).getTimestamp() - tempList.get(1).getTimestamp()) > 4)) {
 
 				long duration = Math.abs(tempList.get(0).getTimestamp() - tempList.get(1).getTimestamp());
 
 				Output output = new Output(entry.getKey(), duration, true);
 
-				
+				if (tempList.get(0).getHost() != null || tempList.get(0).getType() != null) {
 
-				if(tempList.get(0).getHost() != null || tempList.get(0).getType() != null) {
+					output.setHost(tempList.get(0).getHost());
 
-					output.host = tempList.get(0).getHost();
-
-					output.type = tempList.get(0).getType();
+					output.setType(tempList.get(0).getType());
 
 				}
-
-				
 
 				res.add(output);
 
@@ -71,16 +57,7 @@ public class EventAlert {
 
 		}
 
-		
-
 		return res;
-
-		
-
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 	}
 

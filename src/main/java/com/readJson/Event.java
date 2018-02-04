@@ -8,7 +8,6 @@ public class Event {
 	private Long timestamp;
 	
 	public Event(String id, String state, String type, String host, Long timestamp) {
-		super();
 		this.id = id;
 		this.state = state;
 		this.type = type;
