@@ -6,10 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.alert.Output;
 
 public class HSQLDBUtility {
-
+	private static final Logger logger = LogManager.getLogger("HSQLDBUtility");
+	
 	private static Connection connection;
 	private static Statement statement;
 	private static PreparedStatement preparedStmt;
@@ -32,18 +36,19 @@ public class HSQLDBUtility {
 		}
 		
 		connection.close();
+		logger.info("Database connection has been closed.");
 	}
 	
 	public void createTable() throws SQLException {
 		try {
 			connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9001/xdb", "sa", "");
 		} catch (SQLException e) {
-			System.out.println("ERROR:failed to load HSQLDB JDBC driver.");
+			logger.error("ERROR:failed to load HSQLDB JDBC driver.");
 			e.printStackTrace();
 		}
 		
         if (connection != null) {
-            System.out.println("Connected db success!");
+            logger.info("Connected database success!");
             String sql = "CREATE TABLE IF NOT EXISTS EventAlert (" + 
             		"ID VARCHAR(20) NOT NULL PRIMARY KEY," + 
             		"DURATION BIGINT NOT NULL," + 
@@ -53,7 +58,7 @@ public class HSQLDBUtility {
             		")";
             statement = connection.createStatement();
             statement.execute(sql);
-            System.out.println("Create EventAlert Table in HSQLDB successfully!");
+            logger.info("Create EventAlert Table in HSQLDB successfully!");
         }
 	}
 	

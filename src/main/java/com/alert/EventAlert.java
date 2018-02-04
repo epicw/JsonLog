@@ -18,16 +18,17 @@ public class EventAlert {
 		HashMap<String, List<Event>> record = new HashMap<>();
 
 		for (Event event : list) {
-			if (!record.containsKey(event.getId())) {
-				record.put(event.getId(), new ArrayList<Event>());
-			}
-
-			record.get(event.getId()).add(event);
+			List<Event> eventList = record.getOrDefault(event.getId(), new ArrayList<>());
+			eventList.add(event);
+			record.put(event.getId(), eventList);
 		}
 
 		for (Entry<String, List<Event>> entry : record.entrySet()) {
 			List<Event> tempList = entry.getValue();
-
+			if (tempList.size() != 2) {
+				continue;
+			}
+			
 			if ((Math.abs(tempList.get(0).getTimestamp() - tempList.get(1).getTimestamp()) > 4)) {
 				long duration = Math.abs(tempList.get(0).getTimestamp() - tempList.get(1).getTimestamp());
 				Output output = new Output(entry.getKey(), duration, true);

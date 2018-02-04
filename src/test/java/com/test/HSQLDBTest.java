@@ -6,13 +6,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.*;
 
 import com.alert.Output;
 import com.persistence.HSQLDBUtility;
 
 public class HSQLDBTest {
-
+	private static final Logger logger = LogManager.getLogger("HSQLDBTest");
+	
 	private HSQLDBUtility utility;
 	
 	@Before
@@ -41,7 +44,7 @@ public class HSQLDBTest {
 		try {
 			utility.createTable();
 			utility.saveEvent(output);
-			System.out.println("Inserted to HSQLDB successfully");
+			logger.info("Inserted to HSQLDB successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -58,7 +61,7 @@ public class HSQLDBTest {
 		
 			statement = c.createStatement();
 			statement.execute(sql);
-			System.out.println("Deleted all inserted rows");		
+			logger.info("Deleted all inserted rows");		
 			utility.closeConnection();
 			
 		} catch (SQLException e) {

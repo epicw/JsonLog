@@ -4,6 +4,8 @@ import java.util.*;
 import java.io.*;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -14,7 +16,7 @@ import com.persistence.HSQLDBUtility;
 
 
 public class JSONReadFile {
-
+	private static final Logger logger = LogManager.getLogger("JSONReadFile");
 	private static JSONParser parser = new JSONParser();
 	private static BufferedReader bufferReader;
 	
@@ -37,7 +39,7 @@ public class JSONReadFile {
         String readLine = "";
         List<Event> eventList = new ArrayList<>();
         
-        System.out.println("Reading file using Buffered Reader");
+        logger.info("Reading file using Buffered Reader");
         
         while ((readLine = bufferReader.readLine()) != null) {
         	String line = readLine.replace("type", "\"type\"")
@@ -56,7 +58,7 @@ public class JSONReadFile {
 		
 		if (args == null || args.length == 0) {
 			System.out.println("Please type a file name!");
-		}
+		} 
 		
 		String fileName = args[0];
 		
@@ -74,11 +76,11 @@ public class JSONReadFile {
         		}
         		
         		for (Output o: outputList) {
-        			System.out.println(o);
+        			logger.info(o);
         			utility.saveEvent(o);
         		}
         		
-        		System.out.println("Save Event alert to HSQLDB successfully!");
+        		logger.info("Save Event alert to HSQLDB successfully!");
         		
         		utility.closeConnection();
         	}
