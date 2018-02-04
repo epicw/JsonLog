@@ -1,11 +1,19 @@
-In command line, go to {project} folder, use "gradle build"
+1. Open the HSQLDB server
 
-Copy test.json from {project} folder to {project}/build/lib
+   Open the folder of hsqldb/lib
+   
+   In command line, run "java -cp hsqldb.jar org.hsqldb.server.Server --database.0 file:mydb --dbname.0 xdb"
 
-Then open {project}/build/libs, run "java -jar HSQLDBTest-all test.json"
+2. Gradle build and run the project
 
+   In command line, go to {project} folder, use "gradle build"
 
-Open the folder of hsqldb/lib
-In command line, run "java -cp hsqldb.jar org.hsqldb.server.Server --database.0 file:mydb --dbname.0 xdb"
+   Copy test.json from {project} folder to {project}/build/lib
 
-Above line will open a hsqldb server.
+   Then open {project}/build/libs, run "java -jar JsonLog-all test.json"
+
+3. Gradle test
+
+   In command line, run "gradle test" under {project} folder
+   
+   All of the junit tests in this project have passed.

@@ -33,7 +33,7 @@ dependencies {
 	        	'Implementation-Version': 1.0,
 	        	'Main-Class': 'com.readJson.JSONReadFile'
 	    }
-	    baseName = project.name + '-all'
+	    baseName = 'JsonLog-all'
 	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 	    with jar
 	}
