@@ -42,7 +42,7 @@ public class JSONReadFile {
         while ((readLine = bufferReader.readLine()) != null) {
         	String line = readLine.replace("type", "\"type\"")
         					.replace("host", "\"host\"");
-            //System.out.println(line);
+        	
             eventList.add(getEvent(line));
         }
         
@@ -62,11 +62,6 @@ public class JSONReadFile {
 		
         try {
         	List<Event> eventList = j.readFromFile(fileName);
-        	/*if (eventList != null) {
-        		for (Event e: eventList) {
-        			System.out.println(e);
-        		}
-        	}*/
         	
         	EventAlert alert = new EventAlert();
         	List<Output> outputList = alert.longestEvent(eventList);
